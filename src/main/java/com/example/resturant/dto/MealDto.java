@@ -4,15 +4,26 @@ import com.example.resturant.entity.Order;
 import com.example.resturant.entity.Restaurant;
 import com.example.resturant.entity.enums.MealType;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Data
 public class MealDto {
-    private String name;
-    private int quantity;
-    private Double price;
 
-    private Restaurant restaurant;
-    private MealType mealType;
-    private Order order;
+    private  String name;
+    public  Long amount;
+    private String description;
+    private String imgUrl;
+    private Long time ;
+    private String mealType;
+
+
+
+
+
+
+//    private Restaurant restaurant;
+//
+//    private Order order;
 
 }

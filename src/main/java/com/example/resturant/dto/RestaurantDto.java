@@ -16,13 +16,17 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RestaurantDto {
+
     private String ownersName;
     private String restaurantName;
     private String restaurantAddress;
     private String email;
     private String phoneNumber;
-    private String cac;
+    private String cacFileName;
     private String password;
+//    private String cacFileName;
+//    private String cacFileType;
+//    private String cacFileSize;
 
 
 

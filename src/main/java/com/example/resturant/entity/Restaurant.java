@@ -2,11 +2,9 @@ package com.example.resturant.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -21,11 +19,15 @@ public class Restaurant extends BaseEntity {
 
     @Column(unique = true, nullable = false)
     private String email;
+
     private String restaurantName;
     private String restaurantAddress;
     private String phoneNumber;
-    private String cac;
+    @Lob
+    private String cacFileName;
     private String password;
+
+
 
 
     @OneToMany(mappedBy = "restaurant")

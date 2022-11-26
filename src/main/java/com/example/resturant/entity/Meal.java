@@ -11,11 +11,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "meals")
+@Table(name = "mealItem")
 public class Meal extends BaseEntity{
+
+//    private int quantity;
+//    private Double price;
+
     private String name;
-    private int quantity;
-    private Double price;
+    private Long amount;
+    private String description;
+    
+    private String imgUrl;
+    private Long time ;
+
 
     @ManyToOne
     @JoinColumn(name = "restaurantId")
