@@ -1,9 +1,6 @@
 package com.example.resturant.dto;
 
-import com.example.resturant.entity.Customer;
-import com.example.resturant.entity.Note;
-import com.example.resturant.entity.Order;
-import com.example.resturant.entity.Payment;
+import com.example.resturant.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +19,7 @@ public class RestaurantDto {
     private String restaurantAddress;
     private String email;
     private String phoneNumber;
-    private String cacFileName;
+    private Attach cacFileName;
     private String password;
 //    private String cacFileName;
 //    private String cacFileType;

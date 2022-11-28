@@ -23,10 +23,14 @@ public class Restaurant extends BaseEntity {
     private String restaurantName;
     private String restaurantAddress;
     private String phoneNumber;
-    @Lob
-    private String cacFileName;
+//    @Lob
+//    private String cacFileName;
     private String password;
 
+
+
+    @OneToOne
+    private Attach cacFileName;
 
 
 

@@ -35,7 +35,7 @@ public class RestaurantController {
     @Autowired
     private PasswordHashing passwordHashing;
 
-//    @PostMapping//Here we handle the signup API
+    //    @PostMapping//Here we handle the signup API
     @PostMapping("/signup")
     public ResponseEntity<?> signUp( @RequestBody RestaurantDto restaurantDto) {
 

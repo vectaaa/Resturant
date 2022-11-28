@@ -25,7 +25,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 
     @Override
-    public Restaurant login( LoginDto loginDto) { //Here we are trying to find out if the email and password are correct and if it isn't we thjrow an exception but if it is correct we return the get() method in line 30.
+    public Restaurant login( LoginDto loginDto) {
+        //Here we are trying to find out if the email and password are correct and if it isn't we thjrow an exception but if it is correct we return the get() method in line 30.
         Optional<Restaurant> findByEmailAndPassword = restaurantRepo.findByEmailAndPassword(loginDto.getEmail(), loginDto.getPassword());
         System.out.println("I got here 1");
         if (findByEmailAndPassword.get() != null) {
@@ -55,7 +56,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 //            restaurant.setPhoneNumber(restaurantDto.getPhoneNumber());
 //            restaurant.setPassword(restaurantDto.getPassword());
 
-            restaurantRepo.save(restaurant);
+        restaurantRepo.save(restaurant);
 
 //        }
 
