@@ -1,6 +1,7 @@
 package com.example.resturant.entity;
 
 import com.example.resturant.entity.enums.MealType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -9,13 +10,11 @@ import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @ToString
 //@RequiredArgsConstructor
 @Entity
 @Table(name = "mealItem")
-public class Meal extends BaseEntity{
+public class Meal extends BaseEntity {
 
 //    private int quantity;
 //    private Double price;
@@ -25,9 +24,9 @@ public class Meal extends BaseEntity{
     private String description;
 
     @Lob
-    private String imgUrl;
+    @Column(length = 4000) private String imgUrl;
 
-    private Long time ;
+    private Long time;
 
 
     @OneToOne
@@ -56,5 +55,79 @@ public class Meal extends BaseEntity{
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
+    }
+
+    public Attach getMealImage() {
+        return mealImage;
+    }
+
+    public void setMealImage(Attach mealImage) {
+        this.mealImage = mealImage;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+
+    public MealType getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(MealType mealType) {
+        this.mealType = mealType;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

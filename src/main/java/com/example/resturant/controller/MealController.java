@@ -12,18 +12,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 import java.util.List;
 
-import static org.hibernate.tool.schema.SchemaToolingLogging.LOGGER;
-
 @RestController
 @AllArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequestMapping("/meals")
 public class MealController {
 
@@ -40,26 +37,17 @@ public class MealController {
         System.out.println("It is showing");
         LOGGER.info("This name string is" + mealDto.getDescription());
 
-        return new ResponseEntity<>(mealService.createMealByRestaurant(mealDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(mealService.createMealByRestaurant(mealDto), HttpStatus.OK);
     }
 
-//    @GetMapping("/getMeals")
-//    public  ResponseEntity<List<Meal>> getAllMeals(){
-//
-//        List<Meal> result = mealService.getMealsList();
-//
-//        return new ResponseEntity<>(result, HttpStatus.FOUND);
-//
-//    }
-
-
-    @GetMapping("/{getMealsByType}")
-    public ResponseEntity<List<Meal>> getMealByMealType(@PathVariable("getMealsByType") MealType mealType){
-        String milType = mealType.name();
-        List<Meal> result = mealService.getMealsList(milType);
-//
-       return new ResponseEntity<>(result, HttpStatus.FOUND);
-
+// this is the right one, i believe and it was just an sql query.
+    @PostMapping
+    public ResponseEntity<List<Meal>> getAllMealByMealType(){
+       return new ResponseEntity<>(mealRepository.findByOrderByMealType(), HttpStatus.OK);
+    }
+    @GetMapping("/Mealsbyrestaurant/{id}")
+    public ResponseEntity<List<Meal>> getMealsByRestaurantId(@PathVariable("id") Long id ){
+        return new ResponseEntity<>(mealService.getMealByRestaurantId(id), HttpStatus.OK);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.resturant.services.implementation;
 
+import com.example.resturant.config.PasswordHashing;
 import com.example.resturant.dto.RestaurantDto;
 import com.example.resturant.dto.LoginDto;
 import com.example.resturant.entity.Restaurant;
@@ -27,12 +28,20 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Restaurant login( LoginDto loginDto) {
         //Here we are trying to find out if the email and password are correct and if it isn't we thjrow an exception but if it is correct we return the get() method in line 30.
-        Optional<Restaurant> findByEmailAndPassword = restaurantRepo.findByEmailAndPassword(loginDto.getEmail(), loginDto.getPassword());
-        System.out.println("I got here 1");
-        if (findByEmailAndPassword.get() != null) {
-            System.out.println(findByEmailAndPassword.get());
-            System.out.println("I got here 2");
-            return findByEmailAndPassword.get();
+        Restaurant findEmail = restaurantRepo.findByEmail(loginDto.getEmail()).get();
+        PasswordHashing passwordHashing = new PasswordHashing();
+
+         String password = passwordHashing.decryptPassword(findEmail.getPassword());
+        System.out.println("database password: " + password + " " + findEmail.getEmail()    );
+        System.out.println("dto password " + loginDto.getPassword() + " " + loginDto.getEmail());
+         if (password.equals(loginDto.getPassword())){
+             return findEmail;
+//        Optional<Restaurant> findByEmailAndPassword = restaurantRepo.findByEmailAndPassword(loginDto.getEmail(), loginDto.getPassword());
+//        System.out.println(loginDto.getEmail() + " , " + loginDto.getPassword());
+//        if (findByEmailAndPassword.get() != null) {
+//            System.out.println(findByEmailAndPassword.get());
+//            System.out.println("I got here 2");
+//            return findByEmailAndPassword.get();
         }
         System.out.println("I got here 3");
         throw new RestaurantException("Email or password is incorrect");
@@ -67,6 +76,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     public void updateProfile() {
 
     }
+
+
 
 
 

@@ -1,10 +1,14 @@
 package com.example.resturant.dto;
 
 import com.example.resturant.entity.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
@@ -12,7 +16,8 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RestaurantDto {
+@JsonIgnoreProperties
+public class RestaurantDto implements Serializable {
 
     private String ownersName;
     private String restaurantName;
@@ -21,14 +26,6 @@ public class RestaurantDto {
     private String phoneNumber;
     private Attach cacFileName;
     private String password;
-//    private String cacFileName;
-//    private String cacFileType;
-//    private String cacFileSize;
-
-
-
-
-
     private Set<Order> orders;
     private Timestamp createdAt;
     private List<Payment> payments;

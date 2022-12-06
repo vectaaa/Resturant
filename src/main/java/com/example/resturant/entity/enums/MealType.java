@@ -7,6 +7,10 @@ public enum MealType {
     Soups,
     Drinks,
     Proteins,
-    Salads
+    Salads;
 
+    public MealType getMealType() {
+
+        return null;
+    }
 }

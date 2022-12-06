@@ -2,12 +2,16 @@ package com.example.resturant.services.implementation;
 
 import com.example.resturant.dto.MealDto;
 import com.example.resturant.entity.Meal;
+import com.example.resturant.entity.Restaurant;
 import com.example.resturant.entity.enums.MealType;
 import com.example.resturant.repository.MealRepository;
+import com.example.resturant.repository.RestaurantRepository;
 import com.example.resturant.services.MealService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -15,6 +19,9 @@ import java.util.List;
 @AllArgsConstructor
 public class MealServiceImpl implements MealService {
     private MealRepository mealRepository;
+
+    @Autowired
+    private RestaurantRepository restaurantRepository;
 
 //    @Override
 //    public Meal createMealByRestaurant(Meal meal) {
@@ -37,6 +44,10 @@ public class MealServiceImpl implements MealService {
         meal.setTime(mealDto.getTime());
         meal.setImgUrl(mealDto.getImageUrl());
 
+        Restaurant restaurant = restaurantRepository.findById(mealDto.getRestaurantId()).get();
+        meal.setRestaurant(restaurant);
+
+
         return mealRepository.save(meal);
     }
 
@@ -49,30 +60,20 @@ public class MealServiceImpl implements MealService {
     public void updateMealByRestaurant() {
 
     }
-//
-//    @Override
-//    public List<Meal> getMealsList() {
-//
-//        List<Meal> allMeals = mealRepository.findAll();
-//        return allMeals;
-//    }
-
-//    @Override
-//    public List<Meal> getMealsList() {
-//        List<Meal> meals= mealRepository.findMealsByMealType();
-//
-//
-////
-////        Comparator<MealType>  = (Meal m1, Meal m2) ->m1.getMealType().compareTo(m2.getMealType());
-////        meals.sort(compareByMealType);
-//       return meals;
-
-//    }
 
     @Override
-    public List<Meal> getMealsList(String mealType) {
-        List<Meal> meals = mealRepository.findMealsByMealType(mealType);
-        return meals;
+    public List<Meal> getMealByRestaurantId(Long id) {
+        return mealRepository.findMealsByRestaurantId(id);
+    }
+
+    @Override
+    public List<Meal> getMealsList() {
+        return mealRepository.findAll();
+    }
+
+    @Override
+    public List<Meal> getMealsListByMealType() {
+        return mealRepository.findByOrderByMealType();
     }
 
 

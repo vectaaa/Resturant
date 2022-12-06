@@ -1,11 +1,12 @@
 package com.example.resturant.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,6 +15,8 @@ import java.util.Set;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+
 public class Restaurant extends BaseEntity {
     private String ownersName;
 

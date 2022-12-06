@@ -8,8 +8,12 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface MealRepository extends JpaRepository<Meal,Long> {
+public interface MealRepository extends JpaRepository<Meal, Long> {
 
-  @Query("from Meal where mealType = :mealType")
-  List<Meal> findMealsByMealType(@Param("mealType") String mealType);
+    @Query("from Meal where mealType = :mealType")
+    List<Meal> findMealsByMealType(@Param("mealType") String mealType);
+
+    List<Meal> findByOrderByMealType();
+
+    List<Meal> findMealsByRestaurantId(Long id);
 }
